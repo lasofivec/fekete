@@ -6,7 +6,7 @@ import math
 #
 #--------------------------------------------
 class Point(object):
-    
+
     def __init__(self, x, y):
         self.X = x
         self.Y = y
@@ -20,7 +20,7 @@ class Point(object):
         dx = self.X - other.X
         dy = self.Y - other.Y
         return math.hypot(dx,dy)
-    
+
     def __add__(self,other):
         x = self.X + other.X
         y = self.Y + other.Y
@@ -67,8 +67,8 @@ class Vector(Point):
 
 
 #**********************************************************
-# Defines and returns coordinates of the Fekete 
-# points of degree 3, plus associated weights 
+# Defines and returns coordinates of the Fekete
+# points of degree 3, plus associated weights
 # Reference:
 #      Mark Taylor, Beth Wingate, Rachel Vincent,
 #      An Algorithm for Computing Fekete Points in the Triangle,
@@ -131,7 +131,7 @@ def fekete3(p1, p2, p3) :
         if (fekPts.count(new_fek2) == 0) :
             fekPts.append(new_fek2)
             fekWei.append(weights[i])
-        
+
     return [fekPts, fekWei]
 
 
@@ -140,10 +140,10 @@ def main():
     p1 = Point(0,0)
     p2 = Point(1,0)
     p3 = Point(0,1)
-    
+
     [fekPts, fekWei] = fekete3(p1, p2, p3)
 
     for i in range(len(fekPts)) :
         print '{0:2d} {1:6f} {2:6f} {3:6f}'.format(i+1, fekPts[i].X, fekPts[i].Y, fekWei[i])
-    
+
 main()

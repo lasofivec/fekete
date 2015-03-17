@@ -1,0 +1,1 @@
+mencoder mf://@liste_png -mf fps=3:type=png -o film.avi -ovc lavc -vf scale=640:640 -lavcopts vcodec=msmpeg4v2
