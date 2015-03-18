@@ -1,0 +1,72 @@
+30 September 2014   4:30:11.287 PM
+ 
+TRIANGLE_FEKETE_RULE_PRB:
+  FORTRAN90 version
+  Test the TRIANGLE_FEKETE_RULE library.
+ 
+TEST05
+  This routine creates an EPS plot of each
+  set of Fekete points.
+ 
+  Rule        1 plotted in "fekete_rule_1.eps".
+  Rule        2 plotted in "fekete_rule_2.eps".
+  Rule        3 plotted in "fekete_rule_3.eps".
+  Rule        4 plotted in "fekete_rule_4.eps".
+  Rule        5 plotted in "fekete_rule_5.eps".
+  Rule        6 plotted in "fekete_rule_6.eps".
+  Rule        7 plotted in "fekete_rule_7.eps".
+ 
+TEST06
+  REFERENCE_TO_PHYSICAL_T3 transforms a rule
+  on the unit (reference) triangle to a rule on 
+  an arbitrary (physical) triangle.
+ 
+  The reference triangle:
+ 
+         1     0.00000         0.00000    
+         2     1.00000         0.00000    
+         3     0.00000         1.00000    
+ 
+  Rule        1 for reference triangle
+  with area =   0.500000    
+ 
+                X               Y               W
+ 
+         1    0.333333        0.333333        0.450000    
+         2     1.00000         0.00000        0.166667E-01
+         3     0.00000         0.00000        0.166667E-01
+         4     0.00000         1.00000        0.166667E-01
+         5     0.00000        0.276393        0.833333E-01
+         6    0.276393        0.723607        0.833333E-01
+         7    0.723607         0.00000        0.833333E-01
+         8    0.276393         0.00000        0.833333E-01
+         9    0.723607        0.276393        0.833333E-01
+        10     0.00000        0.723607        0.833333E-01
+ 
+  The physical triangle:
+ 
+         1     1.00000         2.00000    
+         2     1.00000         1.00000    
+         3     3.00000         2.00000    
+ 
+  Rule        1 for physical triangle
+  with area =    1.00000    
+ 
+ 
+                X               Y               W
+ 
+         1     1.66667         1.66667        0.450000    
+         2     1.00000         1.00000        0.166667E-01
+         3     1.00000         2.00000        0.166667E-01
+         4     3.00000         2.00000        0.166667E-01
+         5     1.55279         2.00000        0.833333E-01
+         6     2.44721         1.72361        0.833333E-01
+         7     1.00000         1.27639        0.833333E-01
+         8     1.00000         1.72361        0.833333E-01
+         9     1.55279         1.27639        0.833333E-01
+        10     2.44721         2.00000        0.833333E-01
+ 
+TRIANGLE_FEKETE_RULE_PRB:
+  Normal end of execution.
+ 
+30 September 2014   4:30:11.318 PM

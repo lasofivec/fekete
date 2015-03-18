@@ -1,0 +1,14 @@
+xb = -1.5 ; xe = 1.5;
+yb = -1.5 ; ye = 1.5;
+n = 100;
+x = linspace(xb,xe,n);
+y = linspace(yb,ye,n);
+[X,Y]=meshgrid(x,y);
+
+f = boxSplineLinear(X,Y);
+g =
+surf(x,y,f); shading interp
+
+% contourf(x,y,f);
+colorbar(); 
+
