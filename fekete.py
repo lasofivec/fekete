@@ -1,5 +1,5 @@
 import math
-
+import numpy as np
 #--------------------------------------------
 #
 # Class to define a point with cartesian coordinates
@@ -138,12 +138,21 @@ def fekete3(p1, p2, p3) :
 def main():
     #Defining the vertices of the triangle
     p1 = Point(0,0)
-    p2 = Point(1,0)
-    p3 = Point(0,1)
+    p2 = Point(0,1)
+    p3 = Point(np.sqrt(3)*0.5, 0.5)
     
     [fekPts, fekWei] = fekete3(p1, p2, p3)
-
+    
+    coor2D = np.zeros((2, len(fekPts)))
     for i in range(len(fekPts)) :
         print '{0:2d} {1:6f} {2:6f} {3:6f}'.format(i+1, fekPts[i].X, fekPts[i].Y, fekWei[i])
-    
+        coor2D[0, i] = fekPts[i].X
+        coor2D[1, i] = fekPts[i].Y
+        
+    import matplotlib.pyplot as plt
+    plt.plot(coor2D[0,:], coor2D[1,:], 'ro')
+    plt.plot([p1.X, p2.X], [p1.Y, p2.Y], 'k')
+    plt.plot([p1.X, p3.X], [p1.Y, p3.Y], 'k')
+    plt.plot([p3.X, p2.X], [p3.Y, p2.Y], 'k')
+    plt.show(block=True)
 main()
