@@ -1,5 +1,7 @@
 import math
 import numpy as np
+import matplotlib.pyplot as plt
+
 #--------------------------------------------
 #
 # Class to define a point with cartesian coordinates
@@ -149,10 +151,10 @@ def main():
         coor2D[0, i] = fekPts[i].X
         coor2D[1, i] = fekPts[i].Y
         
-    import matplotlib.pyplot as plt
+
     plt.plot(coor2D[0,:], coor2D[1,:], 'ro')
-    plt.plot([p1.X, p2.X], [p1.Y, p2.Y], 'k')
-    plt.plot([p1.X, p3.X], [p1.Y, p3.Y], 'k')
-    plt.plot([p3.X, p2.X], [p3.Y, p2.Y], 'k')
-    plt.show(block=True)
+    # # plt.plot([p1.X, p2.X], [p1.Y, p2.Y], 'k')
+    # # plt.plot([p1.X, p3.X], [p1.Y, p3.Y], 'k')
+    # # plt.plot([p3.X, p2.X], [p3.Y, p2.Y], 'k')
+    # plt.show(block=True)
 main()
