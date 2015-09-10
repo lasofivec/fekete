@@ -102,14 +102,16 @@ def hextocirc2(xcoo, ycoo) :
         x = xcoo[i]
         y = ycoo[i]
         a = np.sqrt( y**2 + x**2 )
-        if (a == 0) :
-            print "ZERO at i = ", i
         if ((x == 0.) or (abs(y)/abs(x) > 1./np.sqrt(3.))) :
             b = abs(y) + 1./np.sqrt(3.)*abs(x)
         else :
             b = 2.*np.sqrt(3.)/3.*abs(x)
-        xnew[i] = xcoo[i]*b/a
-        ynew[i] = ycoo[i]*b/a
+        if (a == 0) :
+            xnew[i] = 0.
+            ynew[i] = 0.
+        else :
+            xnew[i] = xcoo[i]*b/a
+            ynew[i] = ycoo[i]*b/a
     return xnew, ynew
 
 
