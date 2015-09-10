@@ -1,8 +1,9 @@
 import numpy as np
+import pylab as pl
 from numpy import *
 from scipy.special import binom
 from math import factorial
-import pylab as pl
+
 
 def mceil(n) :
     val = int(n)
