@@ -24,30 +24,29 @@ function b = box_rec(n,m,Y,t)
 
   if (sum(n)>BoxEv_s)
 
-%% Recursion case ...
+    %% Recursion case ...
 
     b = 0;
     j = 1;
 
-%% Sum over the remaining directions in BoxEv_X ...
+    %% Sum over the remaining directions in BoxEv_X ...
 
     for i = 1:BoxEv_k
-
 %% Update multiplicity of directions and position in recursion tree
-
       nn = n-BoxEv_I(:,i);
       mm = m+BoxEv_I(i,:);
-
+    
 %% Recursive calls
 
       if (n(i)>1)
-        b = b+      t(:,j) .*box_rec(nn,m ,Y,t                         );
-        b = b+(n(i)-t(:,j)).*box_rec(nn,mm,Y,t-BoxEv_J*(BoxEv_X(i,:)*Y));
+        boxrec = box_rec(nn,m ,Y,t);
+        b = b+ t(:,j) .*boxrec;
+        boxrec = box_rec(nn,mm,Y,t-BoxEv_J*(BoxEv_X(i,:)*Y));
+        b = b+(n(i)-t(:,j)).*boxrec;
         j = j+1;
       elseif (n(i)>0)
 
 %% Update least norm representation
-
         Z = BoxEv_X(find(nn),:);
         if (rank(Z) == BoxEv_s)
           Z = (Z'*Z)\Z';
@@ -58,30 +57,27 @@ function b = box_rec(n,m,Y,t)
       end
     end
 
-%% Normalization
+    %% Normalization
 
     b = b/(sum(n)-BoxEv_s);
   else
 
-%% Base case ... compute characteristic function
-
+    %% Base case ... compute characteristic function
     b = 1;
 
-%% Delayed translations
+    %% Delayed translations
 
-    v = find(n);
+    v = find(n); 
     z = BoxEv_p-BoxEv_J*(m*BoxEv_X);
 
-%% Check against all hyperplanes
+    %% Check against all hyperplanes
 
     for i = 1:BoxEv_s
 
 %% Lookup normal vector to current hyperplane
 
       NN = BoxEv_N(:,1+BoxEv_u*(n-BoxEv_I(:,v(i))));
-
 %% Box is half-open!!!
-
       p  = BoxEv_X(v(i),:)*NN;
       q  = z*NN;
       b  = min(b,1-((p>0&q<0)|(p<0&q>=0)));
@@ -89,7 +85,7 @@ function b = box_rec(n,m,Y,t)
       b  = min(b,1-((p>0&q>=0)|(p<0&q<0)));
     end
 
-%% Normalization
-
+    %% Normalization
+  
     b = b/abs(det(BoxEv_X(v(1:BoxEv_s),:)));
   end

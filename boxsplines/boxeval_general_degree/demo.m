@@ -14,61 +14,79 @@ echo on
 %% It is defined by a matrix of k mutually distinct (s-dim) column vectors.
 %% The first example uses s = k = 2 ...
 
-X  = [ 1  0 ;
-       0  1 ];
+X  = [ sqrt(3)*0.5 -sqrt(3)*0.5  ;
+       0.5 0.5];
 
-X2  = [ 1  0 -1;
-       0  1  1];
-   
-%% The multiple occurrence of identical column is logged in a vector nu
+X2  = [ sqrt(3)*0.5 -sqrt(3)*0.5  0;
+       0.5 0.5 1];
+   %% The multiple occurrence of identical column is logged in a vector nu
 %% holding the number of times each direction is repeated.
 
-nu = [2;2];
-nu2 = [1;1];
-nu3 = [2;2;1];
-
+nu2 = [2;2;2];
+nu11 = [1;1];
+nu12 = [1;1;1];
+nu3 = [3;3];
 %% The box-spline evaluation can be applied to a whole set of sample
 %% points. Here we construct a uniform grid over an approriate interval.
 
-N1 = 65
-N2 = 10
-[xx,yy] = meshgrid(((1:N1)-2)/N2,((1:N1)-2)/N2);
+N1 = 60;
+N2 = 10;
+L1 = 4;%sqrt(3.0)
+L2 = 4;%1.
+%[xx,yy] = meshgrid(((1:N1)-sqrt(3)*0.5)/N2,((1:N1)-sqrt(3)*0.5)/N2);
+[xx,yy] = meshgrid( (1:N1)/N1*L1-1.5, (1:N1)/N1*L2-0.3 );
  p      = [xx(:) yy(:)];
 
 %% To also demonstrate the efficiency of the algorithm, we measure the
 %% execution time.
 
 tic
-b = box_eval(X, nu2, p);
-c = box_eval(X,nu,p-1.2);
-d = box_eval(X2,nu3,p-3);
+'computing b................'
+b = box_eval(X, nu11, p);
+'computing c................'
+c = box_eval(X2,nu12,p);
+'computing d................'
+d = box_eval(X2,nu2,p);
 toc
-
+maxval = max(b(:,:));
 bmat = reshape(b,N1,N1);
 cmat = reshape(c,N1,N1);
 dmat = reshape(d,N1,N1);
-% surf(bmat); hold on
-% surf(cmat); hold on
-% surf(dmat);
-
-bcol = bmat(:,6);
-ccol = cmat(:,24);
-dcol = dmat(:,40);
-YMat = [bcol ccol dcol];
-%createfigure(bmat,cmat,dmat,reshape(YMat,N1,3))
 
 
-% Create multiple lines using matrix input to plot
-plot1 = plot(reshape(YMat,N1,3));
-set(plot1(1),'DisplayName','\Xi_{[e1, e2]}');
-set(plot1(2),'DisplayName','\Xi_{[e1, e2, e1, e2]}');
-set(plot1(3),'DisplayName','\Xi_{[e1, e2, e1, e2, -e1, e2]}');
+% surf(xx, yy, bmat); hold on
+% surf(xx+1, yy+1, cmat); hold on
+% surf(xx+2, yy+2, dmat);
+% xlabel('x','Fontsize',14);
+% ylabel('y','Fontsize',14);
+% axis equal tight;
+% shading interp; lighting phong;
+% colorbar
+% colorbar('Position',...
+%      [0.903504043126687 0.180584551148225 0.0188679245283009 0.548794206101591]);
+% set(gcf, 'Color', [1,1,1]);
+% view([26,24]);
+%myaa('publish');
 
-ylim([-2.5905203908e-18 1.1]);
+% dmat
+bcol = bmat(12,:);
+ccol = cmat(20,:);
+dcol = dmat(35,:);
+x = xx(1,:);
+y1 = bcol;
+y2 = ccol;
+y3 = dcol;
+plot(x,y1,x+1,y2,'-o',x+2,y3,'-*')
+legend('\Xi_{[r1, r2]}', '\Xi_{[r1, r2, r3]}', '\Xi_{[2r1, 2r2, 2r3]}')
+ylim([0 1.2])
+xlim([-1.5 4.5])
+set(gcf, 'Color', [1,1,1]);
+myaa('publish');
 
-% %% The surface you see right now is the graph of a biquadratic tensor
-% %% product Box-spline function.
 % 
+%% The surface you see right now is the graph of a biquadratic tensor
+%% product Box-spline function.
+
 % pause  %% press any key to see more examples
 % 
 % clc, home

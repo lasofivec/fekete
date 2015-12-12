@@ -30,25 +30,23 @@ function b = box_eval(X,nu,p)
 
   [BoxEv_k,BoxEv_s] = size(BoxEv_X);
   [      n,BoxEv_s] = size(p);
-
+  
   BoxEv_I = eye(BoxEv_k);
   BoxEv_J = ones(n,1);
-
+  
+  
 %% Hashing function
 
   BoxEv_u = 2.^(0:BoxEv_k-1);
-
 %% Solve normal equation for least norm representation of p
 
   Y = BoxEv_X(find(nu),:);
   Y = (Y'*Y)\Y';
-
 %% Compute hash table of normal vectors
 
   BoxEv_N = box_normals(BoxEv_s-1,BoxEv_k,zeros(1,BoxEv_k));
-
+  
 %% Do recursion ...
-
   b = box_rec(nu,zeros(1,BoxEv_k),Y,p*Y);
 
 %% Garbage Collection

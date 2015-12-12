@@ -61,7 +61,8 @@ def hexmesh(nhex) :
     r1x2 = 0.5/nhex
     r2x1 = -0.5*np.sqrt(3.)/nhex
     r2x2 = 0.5/nhex
-    ntot = 6.*nhex*(nhex+1.)/2.+1.
+    prod = nhex*(nhex+1)
+    ntot = 6*prod/2+1
     xcoo = np.zeros((ntot))
     ycoo = np.zeros((ntot))
     print "TOTAL POINTS = ", ntot
@@ -102,14 +103,16 @@ def hextocirc2(xcoo, ycoo) :
         x = xcoo[i]
         y = ycoo[i]
         a = np.sqrt( y**2 + x**2 )
-        if (a == 0) :
-            print "ZERO at i = ", i
         if ((x == 0.) or (abs(y)/abs(x) > 1./np.sqrt(3.))) :
             b = abs(y) + 1./np.sqrt(3.)*abs(x)
         else :
             b = 2.*np.sqrt(3.)/3.*abs(x)
-        xnew[i] = xcoo[i]*b/a
-        ynew[i] = ycoo[i]*b/a
+        if (a > 0) :
+            xnew[i] = xcoo[i]*b/a
+            ynew[i] = ycoo[i]*b/a
+        else :
+            xnew[i] = 0.
+            ynew[i] = 0.
     return xnew, ynew
 
 

@@ -32,7 +32,6 @@ function N = box_normals(t,k,M)
     else
 
 %% Normal vector is orthogonal to all selected rows ...
-
       N(:,1) = null(BoxEv_X(find(M),:));
     end
   end
