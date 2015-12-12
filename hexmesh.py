@@ -107,12 +107,21 @@ def hextocirc2(xcoo, ycoo) :
             b = abs(y) + 1./np.sqrt(3.)*abs(x)
         else :
             b = 2.*np.sqrt(3.)/3.*abs(x)
+<<<<<<< HEAD
         if (a > 0) :
             xnew[i] = xcoo[i]*b/a
             ynew[i] = ycoo[i]*b/a
         else :
             xnew[i] = 0.
             ynew[i] = 0.
+=======
+        if (a == 0) :
+            xnew[i] = 0.
+            ynew[i] = 0.
+        else :
+            xnew[i] = xcoo[i]*b/a
+            ynew[i] = ycoo[i]*b/a
+>>>>>>> be7ae7483be74c811f26b06c6e2f50967e120350
     return xnew, ynew
 
 

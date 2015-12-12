@@ -83,6 +83,7 @@ xlim([-1.5 4.5])
 set(gcf, 'Color', [1,1,1]);
 myaa('publish');
 
+<<<<<<< HEAD
 % 
 %% The surface you see right now is the graph of a biquadratic tensor
 %% product Box-spline function.
@@ -124,8 +125,52 @@ myaa('publish');
 % tic
 % b = box_eval(X,nu,p);
 % toc
+=======
+ylim([-2.5905203908e-18 1.1]);
+
+%% The surface you see right now is the graph of a biquadratic tensor
+%% product Box-spline function.
+
+pause  %% press any key to see more examples
+
+clc, home
+
+%% The next example has k = 4 distinct directions in \R^s = \R^2
+%% each occurring only once.
+
+ X      = [ 1  0   1  1 ;
+	       0  1  -1  1 ];
+ nu     = [1;1;1;1];
+ [xx,yy] = meshgrid(((1:20)-2)/6,((1:20)-8)/6);
+ p      = [xx(:) yy(:)];
+
+tic
+b = box_eval(X,nu,p);
+toc
+
+surf(reshape(b,20,20))
+
+%% The resulting function is called the Zwart-Powell-element
+
+pause  %% press any key for one more example
+
+clc, home
+
+%% The last example uses k = 3 directions in \R^s = \R^2. Each has
+%% the multiplicity two.
+
+ X      = [ 1  0  1 ;
+            0  1  1 ];
+ nu     = [2;2;2];
+[xx,yy] = meshgrid(((1:20)-2)/5,((1:20)-2)/5);
+ p      = [xx(:) yy(:)];
+
+tic
+b = box_eval(X,nu,p);
+toc
+>>>>>>> be7ae7483be74c811f26b06c6e2f50967e120350
 % 
-% surf(reshape(b,20,20))
+surf(reshape(b,20,20))
 % 
 % %% This last function is obtained by repeating the directions defining
 % %% the Courant-element twice.
